@@ -1,0 +1,33 @@
+<table class="centered" style="padding-top:10px">
+  <thead>
+    <tr>
+      <th>Nº</th>
+      <th>Data</th>
+      <th>Cliente</th>
+      <th>Pedido</th>
+      <th>Observações</th>
+      <th>Pronto</th>
+      <th>Excluir</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr [ngStyle]="{'background-color':pedido.payload.doc.data().pronto ? '#9fa8da' : '#e0e0e0' }"
+      *ngFor="let pedido of pedidosList; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ pedido.payload.doc.data().dataCriacao }}</td>
+      <td>{{ pedido.payload.doc.data().cliente }}</td>
+      <td><span *ngFor="let p of pedido.payload.doc.data().pedido">
+          {{ p }}
+        </span>
+      </td>
+      <td>{{ pedido.payload.doc.data().observacoes }}</td>
+      <td [hidden]="pedido.payload.doc.data().pronto" (click)="atualizarPedido(pedido)">
+          <a class="cyan darken-4 btn-small"><i class="material-icons">check</i></a>
+      </td>
+      <td [hidden]="pedido.payload.doc.data().pronto" (click)="deletarPedido(pedido)">
+        <a class="red accent-4 btn-small"><i class="material-icons">delete_forever</i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

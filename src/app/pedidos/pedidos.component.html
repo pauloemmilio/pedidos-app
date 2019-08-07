@@ -1,0 +1,26 @@
+<br>
+<form [formGroup]="this.pedidosService.form">
+    <div class="col s4">
+        <h6>Menu</h6>
+        <button class="purple darken-4 btn col s12" *ngFor="let pedido of pedidos" (click)="addPedido(pedido)">
+            {{pedido}}
+        </button>
+    </div>
+    <div class="col s4">
+        <h6>Carrinho</h6>
+        <ul class="collection">
+            <li *ngFor="let pedido of pedidosList">
+                <span class="col s10"> {{ pedido }} </span>
+            <button class="red darken-4 btn-small col s2" (click)="removePedido(pedido)">X</button>
+        </li>
+        </ul>
+    </div>
+    <div class="col s4">
+        <input placeholder="Observações do pedido" formControlName="observacoes" type="text" class="input-field col s12">
+        <input placeholder="Cliente" formControlName="cliente" type="text" class="input-field col s12">
+        <button class="purple darken-4 btn col s12" (click)="onSubmit()">
+            Enviar
+        </button>
+    </div>
+    <br>
+</form>
